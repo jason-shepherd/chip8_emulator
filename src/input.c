@@ -12,7 +12,6 @@ int input_update() {
 	switch(event.type)
 	{
 		case SDL_QUIT:
-			printf("Quit triggered\n");
 			chip8.quit = 1;
 			break;
 		case SDL_KEYDOWN:
@@ -38,6 +37,8 @@ u8 input_wait_key() {
 				return key;
 		}
 	}
+
+	return 0xFF;
 }
 
 u8 input_map(int keycode) {
