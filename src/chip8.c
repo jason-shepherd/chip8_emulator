@@ -5,6 +5,7 @@
 #include "instructions.h"
 #include "display.h"
 #include "input.h"
+#include "beeper.h"
 
 Chip8 chip8;
 
@@ -56,6 +57,7 @@ void chip8_init(char* rom_path) {
  	display_init(chip8.display);
 	clock_init(&chip8.clock, CLOCKSPEED);
 	clock_init(&chip8.timer_clock, 60);
+	beeper_init();
 }
 
 void chip8_run() {
@@ -63,6 +65,11 @@ void chip8_run() {
 	clock_update(&chip8.clock);
 	clock_update(&chip8.timer_clock);
 	chip8_update_timers();
+
+	if(chip8.ST == 0)
+		beeper_stop();
+	else if (chip8.ST > 0)
+		beeper_start();
 
 	if(chip8.clock.run) {
 		u16 instruction = (chip8.memory[chip8.PC] << 8) | chip8.memory[chip8.PC + 1];
@@ -218,6 +225,11 @@ void chip8_update_timers() {
 
 	if(chip8.ST)
 		chip8.ST--;
+}
+
+void chip8_quit() {
+	beeper_quit();
+	display_quit();
 }
 
 void chip8_print_debug(u16 instruction) {

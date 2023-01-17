@@ -35,6 +35,7 @@ void chip8_init(char*);
 void chip8_run();
 void chip8_execute(u16);
 void chip8_update_timers();
+void chip8_quit();
 
 void chip8_print_debug(u16);
 void chip8_print_stack();

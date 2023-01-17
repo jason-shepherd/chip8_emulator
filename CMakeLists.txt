@@ -13,6 +13,7 @@ add_executable(Chip8_Emulator
   src/instructions.c
   src/clock.c
   src/input.c
+  src/beeper.c
   )
 
 target_link_libraries(Chip8_Emulator ${SDL2_LIBRARIES})
