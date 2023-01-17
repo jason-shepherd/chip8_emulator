@@ -17,3 +17,4 @@ add_executable(Chip8_Emulator
   )
 
 target_link_libraries(Chip8_Emulator ${SDL2_LIBRARIES})
+set_target_properties(${PROJECT_NAME} PROPERTIES OUTPUT_NAME "chip8")
